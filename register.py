@@ -142,12 +142,12 @@ class App(QtWidgets.QMainWindow,Ui_Form):
         self.pushButton.clicked.connect(self.startengine)
         
     def startengine(self):
-        print('oooooo')
-        self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: List refreshed')
         self.listWidget.scrollToBottom()
         self.lineEdit.setEnabled(False)
         timeout=float(self.lineEdit.text())
-        threading.Timer(timeout,self.startengine).start()
+        t=threading.Timer(timeout,self.startengine)
+        t.daemon=True
+        t.start()
 
         e1=self.lineEdit_2.text()
         e2=self.lineEdit_3.text()
@@ -226,8 +226,10 @@ class App(QtWidgets.QMainWindow,Ui_Form):
         self.tableWidget.resizeColumnsToContents()
         self.tableWidget_2.resizeColumnsToContents()
         self.listWidget.scrollToBottom()
+        self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: List refreshed')
         if e1b==True or e2b==True or k1b==True:
             w.ShowWindow("Matching course found!","Course Code: {0} {1} {2}".format(*courses))
+        
             
         
 
