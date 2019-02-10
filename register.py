@@ -145,9 +145,8 @@ class App(QtWidgets.QMainWindow,Ui_Form):
         self.listWidget.scrollToBottom()
         self.lineEdit.setEnabled(False)
         timeout=float(self.lineEdit.text())
-        t=threading.Timer(timeout,self.startengine)
-        t.daemon=True
-        t.start()
+        
+        time_now=time.time()
 
         e1=self.lineEdit_2.text()
         e2=self.lineEdit_3.text()
@@ -229,6 +228,11 @@ class App(QtWidgets.QMainWindow,Ui_Form):
         self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: List refreshed')
         if e1b==True or e2b==True or k1b==True:
             w.ShowWindow("Matching course found!","Course Code: {0} {1} {2}".format(*courses))
+        
+        next_time=time_now+timeout
+        t=threading.Timer(next_time-time.time(),self.startengine)
+        t.daemon=True
+        t.start()
         
             
         
