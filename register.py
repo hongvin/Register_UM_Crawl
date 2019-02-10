@@ -15,30 +15,27 @@ from win32gui import *
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1236, 900)
+        Form.resize(1236, 996)
         self.groupBox = QtWidgets.QGroupBox(Form)
-        self.groupBox.setGeometry(QtCore.QRect(10, 10, 361, 771))
+        self.groupBox.setGeometry(QtCore.QRect(10, 10, 361, 831))
         self.groupBox.setObjectName("groupBox")
         self.tableWidget = QtWidgets.QTableWidget(self.groupBox)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 30, 341, 721))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 30, 341, 791))
         self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
         self.groupBox_2 = QtWidgets.QGroupBox(Form)
-        self.groupBox_2.setGeometry(QtCore.QRect(380, 10, 681, 771))
+        self.groupBox_2.setGeometry(QtCore.QRect(380, 10, 681, 831))
         self.groupBox_2.setObjectName("groupBox_2")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.groupBox_2)
-        self.tableWidget_2.setGeometry(QtCore.QRect(10, 30, 651, 721))
+        self.tableWidget_2.setGeometry(QtCore.QRect(10, 30, 651, 791))
         self.tableWidget_2.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.tableWidget_2.setObjectName("tableWidget_2")
         self.tableWidget_2.setColumnCount(0)
         self.tableWidget_2.setRowCount(0)
         self.tableWidget_2.horizontalHeader().setCascadingSectionResizes(True)
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(1070, 310, 91, 16))
-        self.label.setObjectName("label")
         self.groupBox_3 = QtWidgets.QGroupBox(Form)
         self.groupBox_3.setGeometry(QtCore.QRect(1070, 10, 141, 80))
         self.groupBox_3.setObjectName("groupBox_3")
@@ -69,8 +66,18 @@ class Ui_Form(object):
         self.lineEdit_4.setGeometry(QtCore.QRect(10, 20, 113, 22))
         self.lineEdit_4.setText("")
         self.lineEdit_4.setObjectName("lineEdit_4")
-        self.listWidget = QtWidgets.QListWidget(Form)
-        self.listWidget.setGeometry(QtCore.QRect(10, 790, 1211, 101))
+        self.textBrowser = QtWidgets.QTextBrowser(Form)
+        self.textBrowser.setGeometry(QtCore.QRect(1070, 870, 151, 111))
+        self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.textBrowser.setAutoFillBackground(False)
+        self.textBrowser.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.textBrowser.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.textBrowser.setObjectName("textBrowser")
+        self.groupBox_7 = QtWidgets.QGroupBox(Form)
+        self.groupBox_7.setGeometry(QtCore.QRect(10, 840, 1051, 151))
+        self.groupBox_7.setObjectName("groupBox_7")
+        self.listWidget = QtWidgets.QListWidget(self.groupBox_7)
+        self.listWidget.setGeometry(QtCore.QRect(10, 20, 1021, 121))
         self.listWidget.setObjectName("listWidget")
 
         self.retranslateUi(Form)
@@ -78,18 +85,26 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "REGISTER UM"))
         self.groupBox.setTitle(_translate("Form", "Elective"))
         self.tableWidget.setSortingEnabled(True)
         self.groupBox_2.setTitle(_translate("Form", "KoK"))
         self.tableWidget_2.setSortingEnabled(True)
-        self.label.setText(_translate("Form", "Koay Hong Vin"))
-        self.groupBox_3.setTitle(_translate("Form", "Set Timer"))
+        self.groupBox_3.setTitle(_translate("Form", "Set Timer (sec)"))
         self.pushButton.setText(_translate("Form", "START!!"))
         self.lineEdit.setText(_translate("Form", "5"))
         self.groupBox_4.setTitle(_translate("Form", "Targeted Elective 1"))
         self.groupBox_5.setTitle(_translate("Form", "Targeted Elective 2"))
         self.groupBox_6.setTitle(_translate("Form", "Targeted KoK 1"))
+        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">A program by</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">hongvin</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/khvmaths/Register_UM_Crawl\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">Github Link</span></a></p></body></html>"))
+        self.groupBox_7.setTitle(_translate("Form", "Command"))
 
 
 
