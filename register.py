@@ -66,19 +66,20 @@ class Ui_Form(object):
         self.lineEdit_4.setGeometry(QtCore.QRect(10, 20, 113, 22))
         self.lineEdit_4.setText("")
         self.lineEdit_4.setObjectName("lineEdit_4")
-        self.textBrowser = QtWidgets.QTextBrowser(Form)
-        self.textBrowser.setGeometry(QtCore.QRect(1070, 870, 151, 111))
-        self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser.setAutoFillBackground(False)
-        self.textBrowser.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.textBrowser.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.textBrowser.setObjectName("textBrowser")
         self.groupBox_7 = QtWidgets.QGroupBox(Form)
         self.groupBox_7.setGeometry(QtCore.QRect(10, 840, 1051, 151))
         self.groupBox_7.setObjectName("groupBox_7")
         self.listWidget = QtWidgets.QListWidget(self.groupBox_7)
         self.listWidget.setGeometry(QtCore.QRect(10, 20, 1021, 121))
         self.listWidget.setObjectName("listWidget")
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(1090, 930, 131, 41))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -96,15 +97,11 @@ class Ui_Form(object):
         self.groupBox_4.setTitle(_translate("Form", "Targeted Elective 1"))
         self.groupBox_5.setTitle(_translate("Form", "Targeted Elective 2"))
         self.groupBox_6.setTitle(_translate("Form", "Targeted KoK 1"))
-        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">A program by</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">hongvin</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/khvmaths/Register_UM_Crawl\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">Github Link</span></a></p></body></html>"))
         self.groupBox_7.setTitle(_translate("Form", "Command"))
+        self.label.setText(_translate("Form", "A program by\n"
+"hongvin"))
+
+
 
 
 
@@ -198,10 +195,11 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     courses[1]=(a[i].text)
                     
                 k+=1
-        except HTTPError as e:
+        except Exception as e:
             print("Error",e)
             self.tableWidget.setEnabled(False)
             self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Error occured at Elective')
+            self.lineEdit.setEnabled(True)
         
         url = 'http://register.um.edu.my/kok_kosong_bi.asp' 
         request = Request(url)
@@ -233,10 +231,11 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     courses[2]=(a[i].text)
                 self.tableWidget_2.setItem(j,k,QtWidgets.QTableWidgetItem(a[i].text))
                 k+=1
-        except HTTPError as e:
+        except Exception as e:
             print("Error",e)
             self.tableWidget.setEnabled(False)
             self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Error occured at KoK')
+            self.lineEdit.setEnabled(True)
         self.tableWidget.resizeColumnsToContents()
         self.tableWidget_2.resizeColumnsToContents()
         self.listWidget.scrollToBottom()
