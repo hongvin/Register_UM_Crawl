@@ -9,6 +9,7 @@ import win32con
 import os
 import struct
 import time
+import pyttsx3
 from win32api import *
 from win32gui import *
 
@@ -103,8 +104,6 @@ class Ui_Form(object):
 
 
 
-
-
 class WindowsBalloonTip:
     def __init__(self):
         message_map = {
@@ -124,13 +123,9 @@ class WindowsBalloonTip:
                 0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \
                 0, 0, self.hinst, None)
         UpdateWindow(self.hwnd)
-        iconPathName = os.path.abspath(os.path.join( sys.path[0], "balloontip.ico" ))
+        iconPathName = os.path.abspath(os.path.join( sys.path[0], "favicon.ico" ))
         icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
-        try:
-           hicon = LoadImage(self.hinst, iconPathName, \
-                    win32con.IMAGE_ICON, 0, 0, icon_flags)
-        except:
-          hicon = LoadIcon(0, win32con.IDI_APPLICATION)
+        hicon = LoadIcon(0, win32con.IDI_APPLICATION)
         flags = NIF_ICON | NIF_MESSAGE | NIF_TIP
         nid = (self.hwnd, 0, flags, win32con.WM_USER+20, hicon, "tooltip")
         Shell_NotifyIcon(NIM_ADD, nid)
@@ -144,8 +139,13 @@ class WindowsBalloonTip:
         nid = (self.hwnd, 0)
         Shell_NotifyIcon(NIM_DELETE, nid)
         PostQuitMessage(0) # Terminate the app.
-
 w=WindowsBalloonTip()
+
+engine = pyttsx3.init()
+def TTS(text):
+    split=" ".join(text)
+    engine.say('Found!' + split)
+    engine.runAndWait() 
 
 class App(QtWidgets.QMainWindow,Ui_Form):
     def __init__(self):
@@ -189,10 +189,12 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text)
                     e1b=True
                     courses[0]=(a[i].text)
+                    TTS(a[i].text)
                 if e2==a[i].text:
                     self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text)
                     e2b=True
                     courses[1]=(a[i].text)
+                    TTS(a[i].text)
                     
                 k+=1
         except Exception as e:
@@ -229,6 +231,7 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted KoK '+a[i].text)
                     k1b=True
                     courses[2]=(a[i].text)
+                    TTS(a[i].text)
                 self.tableWidget_2.setItem(j,k,QtWidgets.QTableWidgetItem(a[i].text))
                 k+=1
         except Exception as e:
