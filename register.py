@@ -123,7 +123,7 @@ class WindowsBalloonTip:
                 0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \
                 0, 0, self.hinst, None)
         UpdateWindow(self.hwnd)
-        iconPathName = os.path.abspath(os.path.join( sys.path[0], "favicon.ico" ))
+        #iconPathName = os.path.abspath(os.path.join( sys.path[0], "favicon.ico" ))
         icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
         hicon = LoadIcon(0, win32con.IDI_APPLICATION)
         flags = NIF_ICON | NIF_MESSAGE | NIF_TIP
@@ -142,9 +142,12 @@ class WindowsBalloonTip:
 w=WindowsBalloonTip()
 
 engine = pyttsx3.init()
-def TTS(text):
+def TTS(text,grp):
     split=" ".join(text)
-    engine.say('Found!' + split)
+    if grp="":
+        engine.say('Found!'+split)
+    else:
+        engine.say('Found!' + split+'Group '+grp)
     engine.runAndWait() 
 
 class App(QtWidgets.QMainWindow,Ui_Form):
@@ -186,15 +189,15 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     k=0
                 self.tableWidget.setItem(j,k,QtWidgets.QTableWidgetItem(a[i].text))
                 if e1==a[i].text:
-                    self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text)
+                    self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text+' (Group '+a[i+1].text+')')
                     e1b=True
-                    courses[0]=(a[i].text)
-                    TTS(a[i].text)
+                    courses[0]=(a[i].text+'(G'+a[i+1].text+')')
+                    TTS(a[i].text,a[i+1])
                 if e2==a[i].text:
-                    self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text)
+                    self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text+' (Group '+a[i+1].text+')')
                     e2b=True
-                    courses[1]=(a[i].text)
-                    TTS(a[i].text)
+                    courses[1]=(a[i].text+'(G'+a[i+1].text+')')
+                    TTS(a[i].text,a[i+1])
                     
                 k+=1
         except Exception as e:
