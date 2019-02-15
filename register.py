@@ -147,7 +147,7 @@ def TTS(text,grp=""):
     if grp=="":
         engine.say('Found!'+split)
     else:
-        engine.say('Found!' + split+'Group '+grp)
+        engine.say('Found!' + split+'Group '+str(grp))
     engine.runAndWait() 
 
 class App(QtWidgets.QMainWindow,Ui_Form):
@@ -192,12 +192,12 @@ class App(QtWidgets.QMainWindow,Ui_Form):
                     self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text+' (Group '+a[i+1].text+')')
                     e1b=True
                     courses[0]=(a[i].text+'(G'+a[i+1].text+')')
-                    TTS(a[i].text,a[i+1])
+                    TTS(a[i].text,a[i+1].text)
                 if e2==a[i].text:
                     self.listWidget.addItem('['+str(datetime.datetime.now().time())+']: Matched found for targeted elective '+a[i].text+' (Group '+a[i+1].text+')')
                     e2b=True
                     courses[1]=(a[i].text+'(G'+a[i+1].text+')')
-                    TTS(a[i].text,a[i+1])
+                    TTS(a[i].text,a[i+1].text)
                     
                 k+=1
         except Exception as e:
