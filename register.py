@@ -142,9 +142,9 @@ class WindowsBalloonTip:
 w=WindowsBalloonTip()
 
 engine = pyttsx3.init()
-def TTS(text,grp):
+def TTS(text,grp=""):
     split=" ".join(text)
-    if grp="":
+    if grp=="":
         engine.say('Found!'+split)
     else:
         engine.say('Found!' + split+'Group '+grp)
