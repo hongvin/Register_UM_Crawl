@@ -1,6 +1,6 @@
 ##BY hongvin
 ##github.com/khvmaths
-COURSE_CODE = 'GIT1004'
+COURSE_CODE = 'KIE4014'
 REFRESH_TIME = 3
 
 from bs4 import BeautifulSoup
@@ -18,7 +18,10 @@ def startEngine():
     t=threading.Timer(REFRESH_TIME,startEngine).start()
 
     print('['+str(datetime.datetime.now().time())+']: List refreshed!')
-    response = requests.get(site)
+    try:
+        response = requests.get(site)
+    except:
+            print('error!')
     soup = BeautifulSoup(response.text,"html.parser")
     tr = soup.find_all('tr')
     td= tr[8].find_all('td')
@@ -44,7 +47,7 @@ def startEngine():
     print(df)
 
     for i in range(len(group)):
-        if not (df.iat[i,0] == 0):
+        if not (df.iat[i,1] == 0):
             engine.say('Vacancy found Group'+str(i+1))
             print('['+str(datetime.datetime.now().time())+']: FOUND!: GROUP '+str(i))
             engine.runAndWait() 
